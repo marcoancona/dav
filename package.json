@@ -6,6 +6,7 @@
   "license": "MPL-2.0",
   "main": "dav.js",
   "repository": "https://github.com/gaye/dav",
+  "typings": "./index.d.ts",
   "keywords": [
     "address book",
     "calendar",
@@ -67,6 +68,7 @@
   },
   "scripts": {
     "test": "make test",
-    "build": "make"
+    "build": "make",
+    "format": "prettier --config ./.prettierrc --write ."
   }
 }

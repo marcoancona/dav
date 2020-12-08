@@ -1,10 +1,9 @@
 # Windows:
-# .\node_modules\.bin\browserify .\lib\index.js -o .\dav.js --standalone dav --node -t [ babelify --presets [ @babel/preset-env ] --plugins [ @babel/plugin-transform-classes @babel/plugin-transform-runtime ] ]
+# .\node_modules\.bin\browserify .\lib\index.js -o .\dav.js --standalone dav -t [ babelify --presets [ @babel/preset-env ] --plugins [ @babel/plugin-transform-classes @babel/plugin-transform-runtime ] ]
 build: node_modules
 	rm -rf dav.js
 	./node_modules/.bin/browserify ./lib/index.js -o dav.js \
 	--standalone dav \
-	--node \
 	-t [ babelify --presets [ @babel/preset-env ] \
 	--plugins [ @babel/plugin-transform-classes @babel/plugin-transform-runtime ] ]
 

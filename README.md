@@ -1,5 +1,4 @@
-dav
-===
+# dav
 
 [![Build Status](https://travis-ci.org/lambdabaa/dav.png?branch=master)](https://travis-ci.org/lambdabaa/dav)
 
@@ -7,7 +6,8 @@ WebDAV, CalDAV, and CardDAV client for nodejs and the browser.
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-**Table of Contents**  *generated with [DocToc](http://doctoc.herokuapp.com/)*
+
+**Table of Contents** _generated with [DocToc](http://doctoc.herokuapp.com/)_
 
 - [API](#api)
   - [accounts](#accounts)
@@ -201,6 +201,7 @@ Options:
       supported by the server.
   (dav.Transport) xhr - request sender.
 ```
+
 #### dav.syncCarddavAccount(account, options)
 
 Fetch changes from the remote server to the account's address books. Returns a [Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise) which will be fulfilled with an updated [dav.Account](https://github.com/gaye/dav/blob/master/lib/model/account.js) object once sync is complete.
@@ -224,16 +225,18 @@ Create a request sandbox. There is also a deprecated interface
 ```js
 var sandbox = new dav.Sandbox();
 // sandbox instanceof Sandbox
-dav.createAccount({
-  username: 'Yoshi',
-  password: 'babybowsersoscaryomg',
-  server: 'https://caldav.yoshisstory.com',
-  sandbox: sandbox  // <- Insert sandbox here!
-})
-.then(function(calendars) {
-  // etc, etc.
-});
+dav
+  .createAccount({
+    username: 'Yoshi',
+    password: 'babybowsersoscaryomg',
+    server: 'https://caldav.yoshisstory.com',
+    sandbox: sandbox, // <- Insert sandbox here!
+  })
+  .then(function (calendars) {
+    // etc, etc.
+  });
 ```
+
 And abort sandboxed requests as a group with `sandbox.abort()`.
 
 ### transport
@@ -370,33 +373,35 @@ var dav = require('dav');
 var xhr = new dav.transport.Basic(
   new dav.Credentials({
     username: 'xxx',
-    password: 'xxx'
+    password: 'xxx',
   })
 );
 
-dav.createAccount({ server: 'http://dav.example.com', xhr: xhr })
-.then(function(account) {
-  // account instanceof dav.Account
-  account.calendars.forEach(function(calendar) {
-    console.log('Found calendar named ' + calendar.displayName);
-    // etc.
+dav
+  .createAccount({ server: 'http://dav.example.com', xhr: xhr })
+  .then(function (account) {
+    // account instanceof dav.Account
+    account.calendars.forEach(function (calendar) {
+      console.log('Found calendar named ' + calendar.displayName);
+      // etc.
+    });
   });
-});
 
 // Or, using the dav.Client interface:
 
 var client = new dav.Client(xhr);
 // No transport arg
-client.createAccount({
-  server: 'http://dav.example.com',
-  accountType: 'carddav'
-})
-.then(function(account) {
-  account.addressBooks.forEach(function(addressBook) {
-    console.log('Found address book name ' + addressBook.displayName);
-    // etc.
+client
+  .createAccount({
+    server: 'http://dav.example.com',
+    accountType: 'carddav',
+  })
+  .then(function (account) {
+    account.addressBooks.forEach(function (addressBook) {
+      console.log('Found address book name ' + addressBook.displayName);
+      // etc.
+    });
   });
-});
 ```
 
 #### Using the lower-level webdav request api
@@ -463,7 +468,9 @@ xhr.send(req, 'https://mail.mozilla.com/calendars/123.ics')
 For more example usages, check out the [suite of integration tests](https://github.com/gaye/dav/tree/master/test/integration).
 
 ## Running integration tests
+
 Make sure PHP, sqlite3 and PHP extensions are installed:
+
 ```
 sudo apt install php7.0-cli php7.0-mysq php7-dom php7.0-mbstring php7.0-xml
 sudo apt install sqlite3

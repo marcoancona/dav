@@ -5,17 +5,17 @@ import * as dav from '../../lib';
 import { Sandbox, createSandbox } from '../../lib/sandbox';
 import XMLHttpRequestWrapper from '../../lib/XMLHttpRequestWrapper';
 
-suite('sandbox', function() {
+suite('sandbox', function () {
   let sandbox;
 
-  setup(function() {
+  setup(function () {
     sandbox = createSandbox();
   });
 
-  test('#add', function() {
+  test('#add', function () {
     assert.lengthOf(sandbox.requestList, 0);
     let one = new XMLHttpRequestWrapper(),
-        two = new XMLHttpRequestWrapper();
+      two = new XMLHttpRequestWrapper();
     sandbox.add(one);
     sandbox.add(two);
     assert.lengthOf(sandbox.requestList, 2);
@@ -23,34 +23,34 @@ suite('sandbox', function() {
     assert.include(sandbox.requestList, two);
   });
 
-  test('#abort', function() {
+  test('#abort', function () {
     let one = new XMLHttpRequestWrapper(),
-        two = new XMLHttpRequestWrapper();
+      two = new XMLHttpRequestWrapper();
     sandbox.add(one);
     sandbox.add(two);
     let stubOne = sinon.stub(one, 'abort'),
-        stubTwo = sinon.stub(two, 'abort');
+      stubTwo = sinon.stub(two, 'abort');
     sandbox.abort();
     sinon.assert.calledOnce(stubOne);
     sinon.assert.calledOnce(stubTwo);
   });
 });
 
-suite('new sandbox object interface', function() {
+suite('new sandbox object interface', function () {
   let sandbox;
 
-  setup(function() {
+  setup(function () {
     sandbox = new Sandbox();
   });
 
-  test('constructor', function() {
+  test('constructor', function () {
     assert.instanceOf(sandbox, Sandbox);
   });
 
-  test('#add', function() {
+  test('#add', function () {
     assert.lengthOf(sandbox.requestList, 0);
     let one = new XMLHttpRequestWrapper(),
-        two = new XMLHttpRequestWrapper();
+      two = new XMLHttpRequestWrapper();
     sandbox.add(one);
     sandbox.add(two);
     assert.lengthOf(sandbox.requestList, 2);
@@ -58,13 +58,13 @@ suite('new sandbox object interface', function() {
     assert.include(sandbox.requestList, two);
   });
 
-  test('#abort', function() {
+  test('#abort', function () {
     let one = new XMLHttpRequestWrapper(),
-        two = new XMLHttpRequestWrapper();
+      two = new XMLHttpRequestWrapper();
     sandbox.add(one);
     sandbox.add(two);
     let stubOne = sinon.stub(one, 'abort'),
-        stubTwo = sinon.stub(two, 'abort');
+      stubTwo = sinon.stub(two, 'abort');
     sandbox.abort();
     sinon.assert.calledOnce(stubOne);
     sinon.assert.calledOnce(stubTwo);

@@ -2,7 +2,8 @@
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-**Table of Contents**  *generated with [DocToc](http://doctoc.herokuapp.com/)*
+
+**Table of Contents** _generated with [DocToc](http://doctoc.herokuapp.com/)_
 
 - [Under the hood](#under-the-hood)
 - [Running the tests](#running-the-tests)
@@ -31,14 +32,14 @@ dav uses npm to manage external dependencies. External npm modules get bundled i
 
 Things to note:
 
-+ As of 1.1.1, all of the tests run dav via nodejs. There are no browser tests (yet).
-+ You can add helpful debug logs to test output with the `DEBUG` environment variable.
-  + Filter logs by setting `DEBUG=dav:*`, `DEBUG=dav:request:*`, etc.
-+ Integration tests run against [sabredav](http://sabre.io/)
-  + The server code lives [here](https://github.com/gaye/dav/blob/master/test/integration/server/calendarserver.php)
-  + There is a make task which downloads a sabredav release from GitHub that `make test-integration` depends on
-  + The sabredav instance uses sqlite to store dav collections and objects among other things.
-    + The code that seeds the database lives [here](https://github.com/gaye/dav/blob/master/test/integration/server/bootstrap.js)
+- As of 1.1.1, all of the tests run dav via nodejs. There are no browser tests (yet).
+- You can add helpful debug logs to test output with the `DEBUG` environment variable.
+  - Filter logs by setting `DEBUG=dav:*`, `DEBUG=dav:request:*`, etc.
+- Integration tests run against [sabredav](http://sabre.io/)
+  - The server code lives [here](https://github.com/gaye/dav/blob/master/test/integration/server/calendarserver.php)
+  - There is a make task which downloads a sabredav release from GitHub that `make test-integration` depends on
+  - The sabredav instance uses sqlite to store dav collections and objects among other things.
+    - The code that seeds the database lives [here](https://github.com/gaye/dav/blob/master/test/integration/server/bootstrap.js)
 
 ### Publishing a release
 
@@ -51,7 +52,7 @@ Things to note:
 
 ### Related Material
 
-+ [Amazing webdav docs](http://sabre.io/dav/)
-+ [RFC 4791](http://tools.ietf.org/html/rfc4791)
-+ [RFC 5545](http://tools.ietf.org/html/rfc5545)
-+ [RFC 6352](http://tools.ietf.org/html/rfc6352)
+- [Amazing webdav docs](http://sabre.io/dav/)
+- [RFC 4791](http://tools.ietf.org/html/rfc4791)
+- [RFC 5545](http://tools.ietf.org/html/rfc5545)
+- [RFC 6352](http://tools.ietf.org/html/rfc6352)

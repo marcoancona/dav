@@ -2,14 +2,14 @@ import sinon from 'sinon';
 
 import * as dav from '../../lib';
 
-suite('Client', function() {
+suite('Client', function () {
   let client, xhr, send;
 
-  setup(function() {
+  setup(function () {
     xhr = new dav.transport.Basic(
       new dav.Credentials({
         username: 'Killer BOB',
-        password: 'blacklodge'
+        password: 'blacklodge',
       })
     );
 
@@ -17,16 +17,16 @@ suite('Client', function() {
     client = new dav.Client(xhr, { baseUrl: 'https://mail.mozilla.com' });
   });
 
-  teardown(function() {
+  teardown(function () {
     send.restore();
   });
 
-  test('#send', function() {
+  test('#send', function () {
     let url = 'https://mail.mozilla.com/';
     let req = dav.request.basic({
       method: 'PUT',
       data: 'BEGIN:VCALENDAR\nEND:VCALENDAR',
-      etag: 'abc123'
+      etag: 'abc123',
     });
 
     let sandbox = dav.createSandbox();
@@ -34,11 +34,11 @@ suite('Client', function() {
     sinon.assert.calledWith(send, req, url, { sandbox: sandbox });
   });
 
-  test('#send with relative url', function() {
+  test('#send with relative url', function () {
     let req = dav.request.basic({
       method: 'PUT',
       data: 'BEGIN:VCALENDAR\nEND:VCALENDAR',
-      etag: 'abc123'
+      etag: 'abc123',
     });
 
     client.send(req, '/calendars/123.ics');
@@ -49,35 +49,35 @@ suite('Client', function() {
     );
   });
 
-  suite('accounts', function() {
+  suite('accounts', function () {
     let createAccount;
 
-    setup(function() {
+    setup(function () {
       createAccount = sinon.stub(client._accounts, 'createAccount');
     });
 
-    teardown(function() {
+    teardown(function () {
       createAccount.restore();
     });
 
-    test('createAccount', function() {
+    test('createAccount', function () {
       client.createAccount({ sandbox: {}, server: 'http://dav.example.com' });
       sinon.assert.calledWith(createAccount, {
         sandbox: {},
         server: 'http://dav.example.com',
-        xhr: xhr
+        xhr: xhr,
       });
     });
   });
 
-  suite('calendars', function() {
+  suite('calendars', function () {
     let createCalendarObject,
-        updateCalendarObject,
-        deleteCalendarObject,
-        syncCalendar,
-        syncCaldavAccount;
+      updateCalendarObject,
+      deleteCalendarObject,
+      syncCalendar,
+      syncCaldavAccount;
 
-    setup(function() {
+    setup(function () {
       createCalendarObject = sinon.stub(
         client._calendars,
         'createCalendarObject'
@@ -94,7 +94,7 @@ suite('Client', function() {
       syncCaldavAccount = sinon.stub(client._calendars, 'syncCaldavAccount');
     });
 
-    teardown(function() {
+    teardown(function () {
       createCalendarObject.restore();
       updateCalendarObject.restore();
       deleteCalendarObject.restore();
@@ -102,82 +102,58 @@ suite('Client', function() {
       syncCaldavAccount.restore();
     });
 
-    test('#createCalendarObject', function() {
+    test('#createCalendarObject', function () {
       let calendar = new dav.Calendar();
       client.createCalendarObject(calendar, {
         data: 'BEGIN:VCALENDAR\nEND:VCALENDAR',
-        filename: 'test.ics'
+        filename: 'test.ics',
       });
-      sinon.assert.calledWith(
-        createCalendarObject,
-        calendar,
-        {
-          data: 'BEGIN:VCALENDAR\nEND:VCALENDAR',
-          filename: 'test.ics',
-          xhr: xhr
-        }
-      );
+      sinon.assert.calledWith(createCalendarObject, calendar, {
+        data: 'BEGIN:VCALENDAR\nEND:VCALENDAR',
+        filename: 'test.ics',
+        xhr: xhr,
+      });
     });
 
-    test('#updateCalendarObject', function() {
+    test('#updateCalendarObject', function () {
       let object = new dav.CalendarObject();
       client.updateCalendarObject(object);
-      sinon.assert.calledWith(
-        updateCalendarObject,
-        object,
-        {
-          xhr: xhr
-        }
-      );
+      sinon.assert.calledWith(updateCalendarObject, object, {
+        xhr: xhr,
+      });
     });
 
-    test('#deleteCalendarObject', function() {
+    test('#deleteCalendarObject', function () {
       let object = new dav.CalendarObject();
       client.deleteCalendarObject(object);
-      sinon.assert.calledWith(
-        deleteCalendarObject,
-        object,
-        {
-          xhr: xhr
-        }
-      );
+      sinon.assert.calledWith(deleteCalendarObject, object, {
+        xhr: xhr,
+      });
     });
 
-    test('#syncCalendar', function() {
+    test('#syncCalendar', function () {
       let calendar = new dav.Calendar();
       client.syncCalendar(calendar, { syncMethod: 'webdav' });
-      sinon.assert.calledWith(
-        syncCalendar,
-        calendar,
-        {
-          syncMethod: 'webdav',
-          xhr: xhr
-        }
-      );
+      sinon.assert.calledWith(syncCalendar, calendar, {
+        syncMethod: 'webdav',
+        xhr: xhr,
+      });
     });
 
-    test('#syncCaldavAccount', function() {
+    test('#syncCaldavAccount', function () {
       let account = new dav.Account();
       client.syncCaldavAccount(account, { syncMethod: 'webdav' });
-      sinon.assert.calledWith(
-        syncCaldavAccount,
-        account,
-        {
-          syncMethod: 'webdav',
-          xhr: xhr
-        }
-      );
+      sinon.assert.calledWith(syncCaldavAccount, account, {
+        syncMethod: 'webdav',
+        xhr: xhr,
+      });
     });
   });
 
-  suite('contacts', function() {
-    let createCard,
-        updateCard,
-        deleteCard,
-        syncAddressBook,
-        syncCarddavAccount;
+  suite('contacts', function () {
+    let createCard, updateCard, deleteCard, syncAddressBook, syncCarddavAccount;
 
-    setup(function() {
+    setup(function () {
       createCard = sinon.stub(client._contacts, 'createCard');
       updateCard = sinon.stub(client._contacts, 'updateCard');
       deleteCard = sinon.stub(client._contacts, 'deleteCard');
@@ -185,7 +161,7 @@ suite('Client', function() {
       syncCarddavAccount = sinon.stub(client._contacts, 'syncCarddavAccount');
     });
 
-    teardown(function() {
+    teardown(function () {
       createCard.restore();
       updateCard.restore();
       deleteCard.restore();
@@ -193,73 +169,53 @@ suite('Client', function() {
       syncCarddavAccount.restore();
     });
 
-    test('#createCard', function() {
+    test('#createCard', function () {
       let addressBook = new dav.AddressBook();
       client.createCard(addressBook, {
         data: 'BEGIN:VCARD\nEND:VCARD',
-        filename: 'test.vcf'
+        filename: 'test.vcf',
       });
-      sinon.assert.calledWith(
-        createCard,
-        addressBook,
-        {
-          data: 'BEGIN:VCARD\nEND:VCARD',
-          filename: 'test.vcf',
-          xhr: xhr
-        }
-      );
+      sinon.assert.calledWith(createCard, addressBook, {
+        data: 'BEGIN:VCARD\nEND:VCARD',
+        filename: 'test.vcf',
+        xhr: xhr,
+      });
     });
 
-    test('#updateCard', function() {
+    test('#updateCard', function () {
       let object = new dav.VCard();
       client.updateCard(object);
-      sinon.assert.calledWith(
-        updateCard,
-        object,
-        {
-          xhr: xhr
-        }
-      );
+      sinon.assert.calledWith(updateCard, object, {
+        xhr: xhr,
+      });
     });
 
-    test('#deleteCard', function() {
+    test('#deleteCard', function () {
       let object = new dav.VCard();
       client.deleteCard(object);
-      sinon.assert.calledWith(
-        deleteCard,
-        object,
-        {
-          xhr: xhr
-        }
-      );
+      sinon.assert.calledWith(deleteCard, object, {
+        xhr: xhr,
+      });
     });
 
-    test('#syncAddressBook', function() {
+    test('#syncAddressBook', function () {
       let addressBook = new dav.AddressBook();
       client.syncAddressBook(addressBook, {
-        syncMethod: 'basic'
+        syncMethod: 'basic',
       });
-      sinon.assert.calledWith(
-        syncAddressBook,
-        addressBook,
-        {
-          syncMethod: 'basic',
-          xhr: xhr
-        }
-      );
+      sinon.assert.calledWith(syncAddressBook, addressBook, {
+        syncMethod: 'basic',
+        xhr: xhr,
+      });
     });
 
-    test('#syncCarddavAccount', function() {
+    test('#syncCarddavAccount', function () {
       let account = new dav.Account();
       client.syncCarddavAccount(account, { syncMethod: 'basic' });
-      sinon.assert.calledWith(
-        syncCarddavAccount,
-        account,
-        {
-          syncMethod: 'basic',
-          xhr: xhr
-        }
-      );
+      sinon.assert.calledWith(syncCarddavAccount, account, {
+        syncMethod: 'basic',
+        xhr: xhr,
+      });
     });
   });
 });
