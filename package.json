@@ -23,7 +23,7 @@
   ],
   "dependencies": {
     "co": "^4.6.0",
-    "request": "git+https://github.com/marcoancona/request.git#01b7b6ef318fd2f08c9e56ab3f9b9526ce32024d",
+    "request": "git+https://github.com/marcoancona/request.git#bbfb27f13fd5841d894839fc9da8ecf25f642568",
     "xmldom": "^0.1.19"
   },
   "devDependencies": {
