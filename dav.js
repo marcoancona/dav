@@ -29812,12 +29812,16 @@ Redirect.prototype.onResponse = function (response) {
   if (response.statusCode !== 401 && response.statusCode !== 307) {
     // Remove parameters from the previous response, unless this is the second request
     // for a server that requires digest authentication.
-    // delete request.body
-    delete request._form
+    if (!self.followOriginalHttpMethod) {
+       delete request.body
+       delete request._form   
+    }
     if (request.headers) {
       request.removeHeader('host')
-      request.removeHeader('content-type')
-      request.removeHeader('content-length')
+      if (!self.followOriginalHttpMethod) {
+        request.removeHeader('content-type')
+        request.removeHeader('content-length')
+      }
       if (request.uri.hostname !== request.originalHost.split(':')[0]) {
         // Remove authorization if changing hostnames (but not if just
         // changing ports or protocols).  This matches the behavior of curl:
@@ -45804,7 +45808,7 @@ module.exports={
   ],
   "dependencies": {
     "co": "^4.6.0",
-    "request": "git+https://github.com/marcoancona/request.git#ac9d91785c5f0637ad1308ad8ee9bc77d870217b",
+    "request": "git+https://github.com/marcoancona/request.git#5b0355d248ad37c6bbb9d2f834b9ffefbecde8af",
     "xmldom": "^0.1.19"
   },
   "devDependencies": {
