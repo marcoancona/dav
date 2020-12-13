@@ -29812,7 +29812,7 @@ Redirect.prototype.onResponse = function (response) {
   if (response.statusCode !== 401 && response.statusCode !== 307) {
     // Remove parameters from the previous response, unless this is the second request
     // for a server that requires digest authentication.
-    delete request.body
+    // delete request.body
     delete request._form
     if (request.headers) {
       request.removeHeader('host')
@@ -45804,7 +45804,7 @@ module.exports={
   ],
   "dependencies": {
     "co": "^4.6.0",
-    "request": "git+https://github.com/marcoancona/request.git#bbfb27f13fd5841d894839fc9da8ecf25f642568",
+    "request": "git+https://github.com/marcoancona/request.git#ac9d91785c5f0637ad1308ad8ee9bc77d870217b",
     "xmldom": "^0.1.19"
   },
   "devDependencies": {
