@@ -68,6 +68,7 @@ var XMLHttpRequestWrapper = /*#__PURE__*/function () {
           sendImmediately: false
         } : undefined,
         followRedirect: followRedirect,
+        followOriginalHttpMethod: followRedirect,
         timeout: this._defaultTimeout,
         agent: false,
         pool: false
