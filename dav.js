@@ -65,7 +65,7 @@ var XMLHttpRequestWrapper = /*#__PURE__*/function () {
         auth: user ? {
           user: user,
           pass: password,
-          sendImmediately: false
+          sendImmediately: true
         } : undefined,
         followRedirect: followRedirect,
         followOriginalHttpMethod: followRedirect,
